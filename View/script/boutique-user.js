@@ -15,8 +15,7 @@ function decrementQuantity(buttonElement) {
   quantitySpan.textContent = currentQuantity;
 
   // Update the hidden input field for quantity
-  document.getElementById("quantity-backpack-input").value = currentQuantity;
-  console.log("Updated quantity:", currentQuantity);
+  updateQuantityInput(buttonElement, currentQuantity);
 }
 
 function incrementQuantity(buttonElement) {
@@ -36,6 +35,25 @@ function incrementQuantity(buttonElement) {
   quantitySpan.textContent = currentQuantity;
 
   // Update the hidden input field for quantity
-  document.getElementById("quantity-backpack-input").value = currentQuantity;
-  console.log("Updated quantity:", currentQuantity);
+  updateQuantityInput(buttonElement, currentQuantity);
+}
+
+function updateQuantityInput(buttonElement, newQuantity) {
+  // Get the parent form element
+  const formElement = buttonElement.closest("form");
+
+  // Check if the form element exists
+  if (formElement) {
+    // Find the hidden input field for quantity
+    const quantityInput = formElement.querySelector("[name='quantity']");
+
+    // Update the value of the quantity input field
+    if (quantityInput) {
+      quantityInput.value = newQuantity;
+    } else {
+      console.error("Quantity input field not found in the form.");
+    }
+  } else {
+    console.error("Parent form element not found.");
+  }
 }

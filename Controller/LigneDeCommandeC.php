@@ -8,8 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve product ID from the form
     $idProduit = $_POST["idProduit"];
 
-    // Retrieve the quantity from the form
-    $quantity = $_POST["quantity"];
+    // Retrieve the quantity from the form (considering the form field name)
+    $quantity = $_POST["quantity"];  // This will retrieve the value from the specific hidden input field based on the form it belongs to (e.g., quantity-backpack or quantity-fedora)
     echo "Received quantity: " . $quantity;
 
     // Ensure quantity is a valid number

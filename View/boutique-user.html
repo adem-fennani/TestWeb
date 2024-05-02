@@ -23,7 +23,7 @@
         <!-- Float links to the right. Hide them on small screens -->
 
         <div class="w3-right w3-hide-small">
-          <a href="#Cart" class="w3-bar-item w3-button">Panier</a>
+          <a href="front-office.html" class="w3-bar-item w3-button">Retour</a>
         </div>
       </div>
     </div>
@@ -47,27 +47,183 @@
           <h3>Sac à dos</h3>
           <p>49.000 DT</p>
           <div class="w3-section">
-            <form action="../Controller/LigneDeCommandeC.php" method="post">
-              <input type="hidden" name="idProduit" value="1">
+            <form action="panier.php" method="post">
+              <input type="hidden" name="idProduit" value="1" />
               <div class="w3-bar">
                 <div class="w3-bar-item">
-                  <button type="button" class="w3-button w3-white w3-border w3-border-grey" onclick="decrementQuantity(this)">-</button>
+                  <button
+                    type="button"
+                    class="w3-button w3-white w3-border w3-border-grey"
+                    onclick="decrementQuantity(this)"
+                  >
+                    -
+                  </button>
                 </div>
                 <div class="w3-bar-item w3-center w3-black">
                   <span id="quantity-backpack">1</span>
                 </div>
                 <div class="w3-bar-item">
-                  <button type="button" class="w3-button w3-white w3-border w3-border-grey" onclick="incrementQuantity(this)">+</button>
+                  <button
+                    type="button"
+                    class="w3-button w3-white w3-border w3-border-grey"
+                    onclick="incrementQuantity(this)"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
               <p>
-                <input type="hidden" name="quantity" id="quantity-backpack-input" value="1">
-                <button class="w3-button w3-light-grey w3-block" type="submit">Ajouter au panier</button>
+                <input
+                  type="hidden"
+                  name="quantity"
+                  id="quantity-input"
+                  value="1"
+                />
+                <button class="w3-button w3-light-grey w3-block" type="submit">
+                  Ajouter au panier
+                </button>
               </p>
             </form>
-            
           </div>
-        </div>        
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img src="images/fedora.png" alt="Fedora image" style="width: 100%" />
+          <h3>Chapeau</h3>
+          <p>19.000 DT</p>
+          <div class="w3-section">
+            <form action="panier.php" method="post">
+              <input type="hidden" name="idProduit" value="2" />
+              <div class="w3-bar">
+                <div class="w3-bar-item">
+                  <button
+                    type="button"
+                    class="w3-button w3-white w3-border w3-border-grey"
+                    onclick="decrementQuantity(this)"
+                  >
+                    -
+                  </button>
+                </div>
+                <div class="w3-bar-item w3-center w3-black">
+                  <span id="quantity-fedora">1</span>
+                </div>
+                <div class="w3-bar-item">
+                  <button
+                    type="button"
+                    class="w3-button w3-white w3-border w3-border-grey"
+                    onclick="incrementQuantity(this)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <p>
+                <input
+                  type="hidden"
+                  name="quantity"
+                  id="quantity-fedora-input"
+                  value="1"
+                />
+                <button class="w3-button w3-light-grey w3-block" type="submit">
+                  Ajouter au panier
+                </button>
+              </p>
+            </form>
+          </div>
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img src="images/umbrella.png" alt="Parapluie" style="width: 100%" />
+          <h3>Parapluie</h3>
+          <p>15.000 DT</p>
+          <div class="w3-section">
+            <form action="panier.php" method="post">
+              <input type="hidden" name="idProduit" value="3" />
+              <div class="w3-bar">
+                <div class="w3-bar-item">
+                  <button
+                    type="button"
+                    class="w3-button w3-white w3-border w3-border-grey"
+                    onclick="decrementQuantity(this)"
+                  >
+                    -
+                  </button>
+                </div>
+                <div class="w3-bar-item w3-center w3-black">
+                  <span id="quantity-umbrella">1</span>
+                </div>
+                <div class="w3-bar-item">
+                  <button
+                    type="button"
+                    class="w3-button w3-white w3-border w3-border-grey"
+                    onclick="incrementQuantity(this)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <p>
+                <input
+                  type="hidden"
+                  name="quantity"
+                  id="quantity-umbrella-input"
+                  value="1"
+                />
+                <button class="w3-button w3-light-grey w3-block" type="submit">
+                  Ajouter au panier
+                </button>
+              </p>
+            </form>
+          </div>
+        </div>
+
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <img
+            src="images/firstAid.png"
+            alt="Trousse de secours"
+            style="width: 100%"
+          />
+          <h3>Trousse de secours</h3>
+          <p>7.000 DT</p>
+          <div class="w3-section">
+            <form action="panier.php" method="post">
+              <input type="hidden" name="idProduit" value="4" />
+              <div class="w3-bar">
+                <div class="w3-bar-item">
+                  <button
+                    type="button"
+                    class="w3-button w3-white w3-border w3-border-grey"
+                    onclick="decrementQuantity(this)"
+                  >
+                    -
+                  </button>
+                </div>
+                <div class="w3-bar-item w3-center w3-black">
+                  <span id="quantity-firstAid">1</span>
+                </div>
+                <div class="w3-bar-item">
+                  <button
+                    type="button"
+                    class="w3-button w3-white w3-border w3-border-grey"
+                    onclick="incrementQuantity(this)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <p>
+                <input
+                  type="hidden"
+                  name="quantity"
+                  id="quantity-firstAid-input"
+                  value="1"
+                />
+                <button class="w3-button w3-light-grey w3-block" type="submit">
+                  Ajouter au panier
+                </button>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
       <!-- Contact Section -->
 
       <!-- Image of location/map -->
