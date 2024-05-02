@@ -13,6 +13,10 @@ function decrementQuantity(buttonElement) {
 
   // Update the displayed quantity
   quantitySpan.textContent = currentQuantity;
+
+  // Update the hidden input field for quantity
+  document.getElementById("quantity-backpack-input").value = currentQuantity;
+  console.log("Updated quantity:", currentQuantity);
 }
 
 function incrementQuantity(buttonElement) {
@@ -30,4 +34,8 @@ function incrementQuantity(buttonElement) {
 
   // Update the displayed quantity
   quantitySpan.textContent = currentQuantity;
+
+  // Update the hidden input field for quantity
+  document.getElementById("quantity-backpack-input").value = currentQuantity;
+  console.log("Updated quantity:", currentQuantity);
 }
