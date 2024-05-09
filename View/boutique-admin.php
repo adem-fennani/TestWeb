@@ -113,9 +113,17 @@ $commandeModel = new Commande($pdo);
       <p>Commandes non traités</p>
       <div class="w3-grey">
         <div class="w3-container w3-center w3-padding w3-orange" style="width: 100%">
-          ?
+          <?php
+          // Count the number of commandes with "Non traité" statut_commande
+          $query = "SELECT COUNT(*) as count FROM commande WHERE statut_commande = 'Non traité'";
+          $stmt = $pdo->prepare($query);
+          $stmt->execute();
+          $count = $stmt->fetchColumn();
+          echo $count;
+          ?>
         </div>
       </div>
+
     </div>
     <hr />
 
