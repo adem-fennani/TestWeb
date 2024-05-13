@@ -45,6 +45,8 @@ class Categorie
         return $this;
     }
 
+    // CRUD
+
     public function addCategorie($categorie)
     {
         $sql = "INSERT INTO categorie VALUES (null, :nom, :description)";
@@ -58,6 +60,18 @@ class Categorie
             ]);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
+        }
+    }
+
+    public function listCategories()
+    {
+        $sql = "SELECT * FROM categorie";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->query($sql);
+            return $liste;
+        } catch (Exception $e) {
+            die('Error:' . $e->getMessage());
         }
     }
 }
