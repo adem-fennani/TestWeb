@@ -74,4 +74,17 @@ class Categorie
             die('Error:' . $e->getMessage());
         }
     }
+
+    public function deleteCategorie($id_categorie)
+    {
+        $sql = "DELETE FROM categorie WHERE id_categorie = :id_categorie";
+        $db = config::getConnexion();
+        $req = $db->prepare($sql);
+        $req->bindValue(':id_categorie', $id_categorie);
+        try {
+            $req->execute();
+        } catch (Exception $e) {
+            die('Error:' . $e->getMessage());
+        }
+    }
 }

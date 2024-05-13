@@ -35,3 +35,17 @@ if (isset($_POST["nom"]) && isset($_POST["description"])) {
         $error = "Missing information";
     }
 }
+
+
+// Delete Categorie
+$error = "";
+$categorie = new Categorie();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['id_categorie'])) {
+        $id_categorie = $_POST['id_categorie'];
+        $categorie->deleteCategorie($id_categorie);
+        header('Location:../View/List-categories.php');
+        exit();
+    }
+}

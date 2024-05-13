@@ -90,9 +90,7 @@ $list = $categorieC->listCategories(); // Retrieve the list of categories
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
-            <?php
-            foreach ($list as $categorie) {
-            ?>
+            <?php foreach ($list as $categorie) { ?>
                 <tr>
                     <td><?= $categorie['id_categorie']; ?></td>
                     <td><?= $categorie['nom_categorie']; ?></td>
@@ -100,14 +98,20 @@ $list = $categorieC->listCategories(); // Retrieve the list of categories
                     <td align="center">
                         <form method="POST" action="updateCategorie.php">
                             <input type="submit" name="update" value="Update">
-                            <input type="hidden" value=<?PHP echo $categorie['id_categorie']; ?> name="id">
+                            <input type="hidden" value="<?= $categorie['id_categorie']; ?>" name="id">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="POST" action="../Controller/CategorieC.php">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="id_categorie" value="<?= $categorie['id_categorie']; ?>">
+                            <button type="submit">Delete</button>
                         </form>
                     </td>
                 </tr>
-            <?php
-            }
-            ?>
+            <?php } ?>
         </table>
+
 </body>
 
 </html>
