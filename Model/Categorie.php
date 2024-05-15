@@ -54,9 +54,8 @@ class Categorie
         try {
             $query = $db->prepare($sql);
             $query->execute([
-                'nom' => $categorie->getnom(),
+                'nom' => $categorie->getNom(),
                 'description' => $categorie->getDescription(),
-
             ]);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
@@ -85,6 +84,52 @@ class Categorie
             $req->execute();
         } catch (Exception $e) {
             die('Error:' . $e->getMessage());
+        }
+    }
+
+    /* 
+    public function updateCategorie($categorie)
+    {
+        $sql = "UPDATE categorie SET nom = :nom, description = :description WHERE id_categorie = :id_categorie";
+        $db = config::getConnexion();
+        try {
+            $query = $db->prepare($sql);
+            $query->execute([
+                'id_categorie' => $categorie->getIdCategorie(),
+                'nom' => $categorie->getNom(),
+                'description' => $categorie->getDescription(),
+            ]);
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+    */
+
+    public function getAllCategories()
+    {
+        $sql = "SELECT id_categorie, nom_categorie AS nom FROM categorie";
+        $db = config::getConnexion();
+        try {
+            $query = $db->query($sql);
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getCategorieDetails($id_categorie)
+    {
+        $sql = "SELECT * FROM categorie WHERE id_categorie = :id_categorie";
+        $db = config::getConnexion();
+        try {
+            $query = $db->prepare($sql);
+            $query->bindParam(':id_categorie', $id_categorie);
+            $query->execute();
+            return $query->fetch(); // Return category details as an associative array
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+            return null;
         }
     }
 }

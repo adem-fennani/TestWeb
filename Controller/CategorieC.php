@@ -29,7 +29,7 @@ if (isset($_POST["nom"]) && isset($_POST["description"])) {
         // Add the new category
         $Categorie->addCategorie($categorie);
         // Redirect back to back-office.html after adding the category
-        header('Location:../View/back-office.html');
+        header('Location:../View/list-categories.php');
         exit(); // Stop further execution
     } else {
         $error = "Missing information";

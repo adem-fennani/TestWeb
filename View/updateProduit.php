@@ -1,12 +1,33 @@
 <?php
-include '../Controller/CategorieC.php'; // Include the controller file
-$categorieC = new Categorie(); // Create an instance of the Categorie controller
-$list = $categorieC->listCategories(); // Retrieve the list of categories
+include '../Controller/ProduitC.php';
 
+$error = "";
+$produit = null;
+$produitC = new ProduitC();
+
+var_dump($_POST);
+if (isset($_POST["id"]) && isset($_POST["prix"]) && isset($_POST["titre"]) && isset($_POST["quantite"]) && isset($_POST["description"]) && isset($_POST["image"])) {
+    if (!empty($_POST["id"]) && !empty($_POST["prix"]) && !empty($_POST["titre"]) && !empty($_POST["quantite"]) && !empty($_POST["description"]) && !empty($_POST["image"])) {
+
+        $produit = new Produit(
+            $_POST['id'],
+            $_POST['prix'],
+            $_POST['titre'],
+            $_POST['quantite'],
+            $_POST['image'],
+            $_POST['description']
+        );
+
+        $produitC->updateProduit($produit, $_POST['id']);
+        header('Location: listProduit.php');
+    } else {
+        $error = "Des informations sont manquantes.";
+    }
+}
 ?>
 
-<!-- Your HTML code to display the list of categories goes here -->
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -18,12 +39,45 @@ $list = $categorieC->listCategories(); // Retrieve the list of categories
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" href="logo.png" type="image/png">
-    <title>List of Products</title>
-
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Modifier Produit</title>
+    <style>
+        body {
+            font-family: "Montserrat", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+        }
+
+        .w3-sidebar {
+            width: 300px;
+        }
+
+        .container {
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            /* Vous pouvez ajuster la largeur selon vos besoins */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin-left: 0;
+                width: 100%;
+                /* Pour assurer une largeur de 100% sur les appareils mobiles */
+            }
+        }
+    </style>
+
 </head>
 
 <body>
+    <button><a href="showProduits.php">Retour à la liste</a></button>
+    <hr>
+
+    <div id="error">
+        <?php echo $error; ?>
+    </div>
     <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
         <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
         <span class="w3-bar-item w3-right"><img src="logo white.png" alt="" width="40px"></span>
@@ -51,12 +105,14 @@ $list = $categorieC->listCategories(); // Retrieve the list of categories
             <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Aperçu</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Vues</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Geo</a>
-            <a href="../View/ListProduits.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Produits</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  Categories</a>
+            <a href="../View/ListProduits.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Articles</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  Actualités</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  Historique</a>
             <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Paramètres </a><br><br>
         </div>
     </nav>
+
+
     <!-- Overlay effect when opening sidebar on small screens -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
@@ -73,38 +129,40 @@ $list = $categorieC->listCategories(); // Retrieve the list of categories
             </div>
         </div>
     </div>
-    <div class="container">
-        <br><br><br><br><br>
 
-        <center>
-            <h1>List of Categories</h1>
-            <h2>
-                <a href="addCategorie1.php">Add Categorie</a>
-            </h2>
-        </center>
-        <table border="1" align="center" width="70%">
-            <tr>
-                <th>Id Categorie</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Delete</th>
-            </tr>
-            <?php foreach ($list as $categorie) { ?>
-                <tr>
-                    <td><?= $categorie['id_categorie']; ?></td>
-                    <td><?= $categorie['nom_categorie']; ?></td>
-                    <td><?= $categorie['description_categorie']; ?></td>
-                    <td>
-                        <form method="POST" action="../Controller/CategorieC.php">
-                            <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="id_categorie" value="<?= $categorie['id_categorie']; ?>">
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php
-            } ?>
-        </table>
+    <?php
+    if (isset($_POST['id'])) {
+        $produit = $produitC->showProduit($_POST['id']);
+    ?>
+        <div class="container">
+            <form name="f" method="POST">
+
+                <label for="id">ID:</label><br>
+                <input type="text" id="id" name="id" value="<?php echo $produit['id_produit'] ?>" placeholder="Entrez l'ID"><br>
+
+                <label for="prix">Prix:</label><br>
+                <input type="text" id="prix" name="prix" value="<?php echo $produit['prix_unitaire'] ?>" placeholder="Entrez le Prix"><br>
+
+                <label for="titre">Titre:</label><br>
+                <input type="text" id="titre" name="titre" value="<?php echo $produit['titre_produit'] ?>" placeholder="Entrez le Titre"><br>
+
+                <label for="quantite">Quantité:</label><br>
+                <input type="text" id="quantite" name="quantite" value="<?php echo $produit['quantite_produit'] ?>" placeholder="Entrez la Quantité"><br>
+
+                <label for="description">Description:</label><br>
+                <input type="text" id="description" name="description" value="<?php echo $produit['description_produit'] ?>" placeholder="Entrez la Description"><br>
+
+                <label for="image">Image:</label><br>
+                <input type="text" id="image" name="image" value="<?php echo $produit['image_produit'] ?>" placeholder="Entrez l'URL de l'Image"><br>
+
+                <button type="submit">Valider</button>
+                <button type="reset">Annuler</button>
+            </form>
+        </div>
+
+    <?php
+    }
+    ?>
 </body>
 
 </html>
